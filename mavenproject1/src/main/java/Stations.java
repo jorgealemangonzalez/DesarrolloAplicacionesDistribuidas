@@ -32,10 +32,13 @@ public class Stations {
 
     @Override
     public String toString() {
-        String Sstations = "";
-        for(Station station : stations){
-            Sstations += station.toString() + " , ";
+        String Sstations = "[ ";
+        for(int i = 0 ; i < stations.size() ; ++i){
+            Sstations += stations.get(i).toString();
+            if(i != stations.size()-1)
+                Sstations += " , ";
         }
+        Sstations += " ]";
         return "Stations{" + "stations=" + Sstations + '}';
     }
 }

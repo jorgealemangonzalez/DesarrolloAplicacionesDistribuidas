@@ -1,7 +1,0 @@
-/**
- *
- * @author jorgeAleman
- */
-class Subscription {
-    
-}
