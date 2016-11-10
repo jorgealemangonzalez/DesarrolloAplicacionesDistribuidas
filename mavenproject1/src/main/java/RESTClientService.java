@@ -1,4 +1,7 @@
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -21,14 +24,22 @@ import javax.ws.rs.core.Response;
  */
 @Path("/client")
 public class RESTClientService {
-    private static Users users;
+    private static Users users_rest;
+    
+    public RESTClientService(){};
+    //prueva
+     List<String> prueva = Arrays.asList("1","2","3");
+
+    User usuarioPrueva = new User("631651",prueva,"239602143");
     
     @POST
     @Path("/subscrive")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response subscrive(User user){
         System.out.println("Subscrive request of user "+user.getPhoneNumber());
-        users.addUser(user);
+        users_rest.addUser(user);
+        System.out.println("AASD");
+        System.out.println("NUMBER OF USER " +users_rest.getUsers().size());
         return Response.status(200).build();//TODO hacer control de errores ??
     }
     
@@ -36,7 +47,7 @@ public class RESTClientService {
     @Path("/getClients")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getClients(){
-        System.out.println("Request to get all clients");
+        System.out.println("Request to get all clients" + users_rest.getUsers().size());
         return Response.status(200).entity(RESTClientService.getStaticUsers()).build();
     }
     
@@ -44,7 +55,7 @@ public class RESTClientService {
     @Path("/notifySlots/{phonenumber}")
     public Response notifySlots(@PathParam("phonenumber") String phone){
         System.out.println("Request to send slots by phone to "+phone);
-        User user = users.findByPhone(phone);
+        User user = users_rest.findByPhone(phone);
         if(user != null){
             String mesage = "This are the free slots in your subscrived bicing stations:\n ";
             Stations stations = RESTStationsService.getStaticStations();
@@ -54,7 +65,7 @@ public class RESTClientService {
                 mesage += "Station " + station.getId() + " has " + station.getSlots() + " free slots\n";
             }
             
-            TelegramFakeInterface.sendMesage(phone, mesage);//TODO Maibe change to tokenId
+            TelegramFakeInterface.sendMesage(user.getTelegramToken(), mesage);//TODO Maibe change to tokenId
             
             return Response.status(200).build();
             
@@ -69,6 +80,6 @@ public class RESTClientService {
         
     }
     private static Users getStaticUsers(){
-        return RESTClientService.users;
+        return RESTClientService.users_rest;
     }
 }

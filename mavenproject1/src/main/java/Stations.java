@@ -4,53 +4,50 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author jorgeAleman
- */
-public class Stations implements java.lang.Iterable{
-    private HashMap<String,Station> stations;   //id to Station
+ 
+public class Stations {
+    
+    private List<Station> stations;
 
     public Stations(){
-        stations = new HashMap<String,Station>();
+        stations = new ArrayList<Station>();
     }
-    public Stations(HashMap<String,Station> stations) {
+    public Stations(List<Station> stations) {
         this.stations = stations;
     }
 
-    public HashMap<String,Station> getStations() {
+    public List<Station> getStations() {
         return stations;
     }
 
-    public void setStations(HashMap<String,Station> stations) {
+    public void setStations(List<Station> stations) {
         this.stations = stations;
     }
     
     public Station getStationById(String id){
-        return stations.get(id);
+        for(Station s : stations){
+            if(s.getId().equals(id)){
+                return s;
+            }
+        }
+        return null;
     }
-    
+
     @Override
     public String toString() {
         String Sstations = "[ ";
-        Station[] stationsA = (Station[]) stations.entrySet().toArray();
-        for(int i = 0 ; i < stationsA.length ; ++i){
-            Sstations += stationsA[i].toString();
-            if(i != stationsA.length - 1)
+        for(int i = 0 ; i < stations.size() ; ++i){
+            Sstations += stations.get(i).toString();
+            if(i != stations.size()-1)
                 Sstations += " , ";
         }
         Sstations += " ]";
         return "Stations{" + "stations=" + Sstations + '}';
     }
+
     
-    //Maybe not needed , if nobody iterate it
-    public Iterator iterator() {
-        return stations.entrySet().iterator();
-    }
 }
+
+    
+    
+    

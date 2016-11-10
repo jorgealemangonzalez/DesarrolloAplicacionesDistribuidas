@@ -20,7 +20,8 @@ public class Station {
     private String bikes;
     private String nearbyStations;
     private String status;
-
+    
+    public Station(){};
     @Override
     public String toString() {
         return "Station{" + "id=" + id + ", type=" + type + ", latitude=" + latitude + ", longitude=" + longitude + ", streetName=" + streetName + ", streetNumber=" + streetNumber + ", altitude=" + altitude + ", slots=" + slots + ", bikes=" + bikes + ", nearbyStations=" + nearbyStations + ", status=" + status + '}';

@@ -38,7 +38,7 @@ public class RESTStationsService {
     public Response addStation(Station station){
         System.out.println("Add station request...");
         System.out.println(station);
-        stations.getStations().put("k",station);
+        stations.getStations().add(station);
         return Response.status(200).build();
     }
     //Para testear , no para la practica

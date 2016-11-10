@@ -5,11 +5,13 @@ import java.util.List;
  *
  * @author jorgeAleman
  */
-class User {
+public class User {
     private String phoneNumber;
     private List<String> stationIds;
     private String telegramToken;
-
+    
+    public User(){};
+    
     public User(String phoneNumber, List<String> stationIds, String telegramToken) {
         this.phoneNumber = phoneNumber;
         this.stationIds = stationIds;
