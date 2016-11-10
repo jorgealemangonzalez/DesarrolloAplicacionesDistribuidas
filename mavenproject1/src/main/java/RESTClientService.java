@@ -20,16 +20,14 @@ import javax.ws.rs.core.Response;
  * @author jorgeAleman
  */
 @Path("/client")
-/**
- * 
- */
 public class RESTClientService {
-    private Users users;
+    private static Users users;
     
     @POST
     @Path("/subscrive")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response subscrive(User user){
+        System.out.println("Subscrive request of user "+user.getPhoneNumber());
         users.addUser(user);
         return Response.status(200).build();//TODO hacer control de errores ??
     }
@@ -37,18 +35,29 @@ public class RESTClientService {
     @GET
     @Path("/getClients")
     @Produces(MediaType.APPLICATION_JSON)
-    public Users getClients(){
-        return users;
+    public Response getClients(){
+        System.out.println("Request to get all clients");
+        return Response.status(200).entity(RESTClientService.getStaticUsers()).build();
     }
     
     @GET
     @Path("/notifySlots/{phonenumber}")
     public Response notifySlots(@PathParam("phonenumber") String phone){
-        //Send telegram message
+        System.out.println("Request to send slots by phone to "+phone);
         User user = users.findByPhone(phone);
         if(user != null){
-            //TODO send by telegrarm mesage con el token de telegram
+            String mesage = "This are the free slots in your subscrived bicing stations:\n ";
+            Stations stations = RESTStationsService.getStaticStations();
+            
+            for(String userStationId : user.getStationIds()){
+                Station station = stations.getStationById(userStationId);
+                mesage += "Station " + station.getId() + " has " + station.getSlots() + " free slots\n";
+            }
+            
+            TelegramFakeInterface.sendMesage(phone, mesage);//TODO Maibe change to tokenId
+            
             return Response.status(200).build();
+            
         }else{
             throw new WebApplicationException(
                     Response.status(Response.Status.NOT_FOUND)
@@ -58,5 +67,8 @@ public class RESTClientService {
             );
         }
         
+    }
+    private static Users getStaticUsers(){
+        return RESTClientService.users;
     }
 }

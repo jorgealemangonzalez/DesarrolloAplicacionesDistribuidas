@@ -1,5 +1,6 @@
 
 import com.mycompany.mavenproject1.Item;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -39,6 +40,13 @@ public class RestClient {
         
         for(Item i : items)
             System.out.println("Item: " + i.toString());
+        /*
+        User u1 = new User("1111",new ArrayList<String>(),"toka");
+        User u2 = new User("2222",new ArrayList<String>(),"tokb");
+        
+        WebTarget server = client.target("http://localhost:15000");
+        
+        */
         
     }
 }

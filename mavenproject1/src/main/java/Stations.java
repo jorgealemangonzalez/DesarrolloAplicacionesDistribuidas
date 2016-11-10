@@ -1,5 +1,7 @@
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 /*
@@ -12,33 +14,43 @@ import java.util.List;
  *
  * @author jorgeAleman
  */
-public class Stations {
-    private List<Station> stations;
+public class Stations implements java.lang.Iterable{
+    private HashMap<String,Station> stations;   //id to Station
 
     public Stations(){
-        stations = new ArrayList<Station>();
+        stations = new HashMap<String,Station>();
     }
-    public Stations(List<Station> stations) {
+    public Stations(HashMap<String,Station> stations) {
         this.stations = stations;
     }
 
-    public List<Station> getStations() {
+    public HashMap<String,Station> getStations() {
         return stations;
     }
 
-    public void setStations(List<Station> stations) {
+    public void setStations(HashMap<String,Station> stations) {
         this.stations = stations;
     }
-
+    
+    public Station getStationById(String id){
+        return stations.get(id);
+    }
+    
     @Override
     public String toString() {
         String Sstations = "[ ";
-        for(int i = 0 ; i < stations.size() ; ++i){
-            Sstations += stations.get(i).toString();
-            if(i != stations.size()-1)
+        Station[] stationsA = (Station[]) stations.entrySet().toArray();
+        for(int i = 0 ; i < stationsA.length ; ++i){
+            Sstations += stationsA[i].toString();
+            if(i != stationsA.length - 1)
                 Sstations += " , ";
         }
         Sstations += " ]";
         return "Stations{" + "stations=" + Sstations + '}';
+    }
+    
+    //Maybe not needed , if nobody iterate it
+    public Iterator iterator() {
+        return stations.entrySet().iterator();
     }
 }

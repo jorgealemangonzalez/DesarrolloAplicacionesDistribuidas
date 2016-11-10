@@ -13,7 +13,7 @@ import java.util.List;
  * @author jorgeAleman
  */
 public class Users {
-    private List<User> users;
+    private List<User> users;//TODO maybe implement hashmap phone -> user
     
     public Users(List<User> users) {
         this.users = users;
