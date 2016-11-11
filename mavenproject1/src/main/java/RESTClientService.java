@@ -26,20 +26,17 @@ import javax.ws.rs.core.Response;
 public class RESTClientService {
     private static Users users_rest;
     
-    public RESTClientService(){};
-    //prueva
-     List<String> prueva = Arrays.asList("1","2","3");
-
-    User usuarioPrueva = new User("631651",prueva,"239602143");
-    
+    public RESTClientService(){
+        if(users_rest == null){
+            users_rest = new Users();
+        }
+    };    
     @POST
     @Path("/subscrive")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response subscrive(User user){
         System.out.println("Subscrive request of user "+user.getPhoneNumber());
         users_rest.addUser(user);
-        System.out.println("AASD");
-        System.out.println("NUMBER OF USER " +users_rest.getUsers().size());
         return Response.status(200).build();//TODO hacer control de errores ??
     }
     
@@ -79,6 +76,7 @@ public class RESTClientService {
         }
         
     }
+
     private static Users getStaticUsers(){
         return RESTClientService.users_rest;
     }
