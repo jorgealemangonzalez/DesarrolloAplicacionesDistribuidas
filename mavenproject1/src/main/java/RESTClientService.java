@@ -1,6 +1,7 @@
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -56,14 +57,12 @@ public class RESTClientService {
         if(user != null){
             String mesage = "This are the free slots in your subscrived bicing stations:\n ";
             Stations stations = RESTStationsService.getStaticStations();
-            
             for(String userStationId : user.getStationIds()){
                 Station station = stations.getStationById(userStationId);
-                mesage += "Station " + station.getId() + " has " + station.getSlots() + " free slots\n";
-            }
-            
+                System.out.println("station value  "+station.getId());
+                if(station != null)mesage += "Station " + station.getId() + " has " + station.getSlots() + " free slots\n";
+            }       
             TelegramFakeInterface.sendMesage(user.getTelegramToken(), mesage);//TODO Maibe change to tokenId
-            
             return Response.status(200).build();
             
         }else{

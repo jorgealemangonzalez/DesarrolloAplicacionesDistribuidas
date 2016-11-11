@@ -29,6 +29,7 @@ public class User {
     public List<String> getStationIds() {
         return stationIds;
     }
+    
 
     public void setStationIds(List<String> stationIds) {
         this.stationIds = stationIds;

@@ -3,6 +3,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
  
 public class Stations {
@@ -24,9 +27,13 @@ public class Stations {
         this.stations = stations;
     }
     
-    public Station getStationById(String id){
+    public Station getStationById(String id) {
+        String newStation;
         for(Station s : stations){
-            if(s.getId().equals(id)){
+            //sacar los espacios de los strings!
+            newStation = s.getId().replace(" ", "");
+            id = id.replace(" ","");
+            if(newStation.equals(id) ){
                 return s;
             }
         }
