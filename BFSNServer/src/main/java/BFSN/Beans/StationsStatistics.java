@@ -2,6 +2,7 @@ package BFSN.Beans;
 
 
 
+
 /**
  *
  * @author jorgeAleman
@@ -12,6 +13,7 @@ public class StationsStatistics {
     private String totalOcupiedSlots;
     private String totalNumberStations;
     private String averageAltitude;
+    private String emptySlots ="";
     //TODO poner stations llenas y vacias
     
     public StationsStatistics(){}
@@ -25,6 +27,9 @@ public class StationsStatistics {
         //System.out.println("Extracting stations");
         for(Station station : stations.getStations()){
             //System.out.println("Extracting station: "+station.toString());
+            if(station.getSlots().equals("0")){
+                emptySlots += station.getId() + " ";
+            }
             totalFreeSlotsLocal += Integer.parseInt(station.getSlots());
             //System.out.println(totalFreeSlotsLocal);
             totalOcupiedSlotsLocal += Integer.parseInt(station.getBikes());
@@ -40,6 +45,13 @@ public class StationsStatistics {
         this.totalNumberStations = totalNumberStationsLocal.toString();
         
         //System.out.println(this.toString());
+    }
+
+    public String getEmptySlots() {
+        return emptySlots;
+    }
+    public void setEmptySlots(String emptySlots){
+        this.emptySlots = emptySlots;
     }
 
     public String getTotalFreeSlots() {
@@ -76,7 +88,7 @@ public class StationsStatistics {
     
     @Override
     public String toString() {
-        return "StationsStatics{" + "totalFreeSlots=" + totalFreeSlots + ", totalOcupiedSlots=" + totalOcupiedSlots + ", totalNumberStations=" + totalNumberStations + ", averageAltitude=" + averageAltitude + '}';
+        return "StationsStatics{" + "totalFreeSlots=" + totalFreeSlots + ", totalOcupiedSlots=" + totalOcupiedSlots + ", totalNumberStations=" + totalNumberStations + ", averageAltitude=" + averageAltitude + ", emptySlots by id="+ emptySlots +'}';
     }
     
      
