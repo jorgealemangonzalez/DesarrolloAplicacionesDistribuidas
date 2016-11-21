@@ -21,8 +21,8 @@ import org.quartz.JobExecutionException;
 public class ScheduledBicingRetrieval implements Job{
     
     /**
-     * @param context 
      * 
+     * @param context 
      */
     public void execute(JobExecutionContext context) throws JobExecutionException {
         System.out.println("Retriving bicing stations at " + new Date());

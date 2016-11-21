@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package TwitterPublisher;
 
 import java.util.logging.Level;
@@ -18,15 +14,17 @@ import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
 
 /**
- *
- * @author jorgeAleman
+ * Publisher in tiwtter.
+ * It creates a client who obtain the stations
+ * statics from BFSN servlet and publish them
+ * on twitter.
  */
 public class TwitterPublisher {
     public static void main(String[] args){
-        // Specify the job' s details..
+        
         JobDetail job = JobBuilder.newJob(TwitterPublisherBFSNClient.class)
             .withIdentity("twitter").build();
-        // Specify the running period of the job
+        
         Trigger trigger = TriggerBuilder.newTrigger()
             .withSchedule(SimpleScheduleBuilder.simpleSchedule()
             .withIntervalInSeconds(60).repeatForever())

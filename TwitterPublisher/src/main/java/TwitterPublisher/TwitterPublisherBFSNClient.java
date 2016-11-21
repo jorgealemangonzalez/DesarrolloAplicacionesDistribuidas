@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package TwitterPublisher;
 
 import TwitterPublisher.Beans.StationsStatistics;
@@ -20,7 +15,9 @@ import org.quartz.JobExecutionException;
 import twitter4j.TwitterException;
 
 /**
- *
+ * Client who connect to BFSN servlet and
+ * relies the message to publish on twitter
+ * to TwitterInterface.
  * @author jorgeAleman
  */
 public class TwitterPublisherBFSNClient implements Job{
@@ -30,9 +27,9 @@ public class TwitterPublisherBFSNClient implements Job{
         
         Client client = ClientBuilder.newClient();
         WebTarget BFSNpublicAPI = client.target("http://localhost:15000").path("stations/getStationsStatistics");
-// Add items
+        // get statistics
         StationsStatistics statistics =  BFSNpublicAPI.request(MediaType.APPLICATION_JSON_TYPE).get(new GenericType<StationsStatistics>(){});
-        
+        //Parse them to obtain a plain text message
         String message = this.parseStatics(statistics);
         
         try {
@@ -42,13 +39,18 @@ public class TwitterPublisherBFSNClient implements Job{
         }
     }
     
-    //TODO a lo mejor cojer por getters
-    public String parseStatics(StationsStatistics ss){
+    /**
+     * Create a plain text description of the statistics of stations.
+     * @param stationsStatistics
+     * @return the parsed statistics inside a string object
+     */
+    public String parseStatics(StationsStatistics stationsStatistics){
         String parsed = "Stations statistics:\n";
-        parsed+= "Average altitude: "+ss.getAverageAltitude()+"\n";
-        parsed+= "Total free slots: "+ss.getTotalFreeSlots()+"\n";
-        parsed+= "Total number of stations: "+ss.getTotalNumberStations()+"\n";
-        parsed+= "Total ocupied slots: "+ss.getTotalOcupiedSlots()+"\n";
+        parsed+= "Average altitude: "+stationsStatistics.getAverageAltitude()+"\n";
+        parsed+= "Total free slots: "+stationsStatistics.getTotalFreeSlots()+"\n";
+        parsed+= "Total number of stations: "+stationsStatistics.getTotalNumberStations()+"\n";
+        parsed+= "Total ocupied slots: "+stationsStatistics.getTotalOcupiedSlots()+"\n";
+        parsed+= "Total stations without bikes: "+stationsStatistics.getStationsWithoutSlots()+"\n";
         
         return parsed;
     }

@@ -1,6 +1,8 @@
 package TwitterPublisher.Beans;
 
 
+
+
 /**
  *
  * @author jorgeAleman
@@ -11,10 +13,19 @@ public class StationsStatistics {
     private String totalOcupiedSlots;
     private String totalNumberStations;
     private String averageAltitude;
+    private String stationsWithoutSlots ="";
     //TODO poner stations llenas y vacias
     
     public StationsStatistics(){}
     
+    public String getStationsWithoutSlots() {
+        return stationsWithoutSlots;
+    }
+
+    public void setStationsWithoutSlots(String stationsWithoutSlots) {
+        this.stationsWithoutSlots = stationsWithoutSlots;
+    }
+
     
     public String getTotalFreeSlots() {
         return totalFreeSlots;
@@ -50,10 +61,8 @@ public class StationsStatistics {
     
     @Override
     public String toString() {
-        return "StationsStatics{" + "totalFreeSlots=" + totalFreeSlots + ", totalOcupiedSlots=" + totalOcupiedSlots + ", totalNumberStations=" + totalNumberStations + ", averageAltitude=" + averageAltitude + '}';
+        return "StationsStatics{" + "totalFreeSlots=" + totalFreeSlots + ", totalOcupiedSlots=" + totalOcupiedSlots + ", totalNumberStations=" + totalNumberStations + ", averageAltitude=" + averageAltitude + ", emptySlots by id="+ stationsWithoutSlots +'}';
     }
     
-    
+     
 }
-
-

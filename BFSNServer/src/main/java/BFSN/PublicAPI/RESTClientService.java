@@ -6,10 +6,6 @@ import BFSN.Beans.Station;
 import BFSN.Beans.User;
 import BFSN.Beans.Stations;
 import BFSN.Connexions.TelegramInterface;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -20,11 +16,6 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  *
@@ -49,9 +40,20 @@ public class RESTClientService {
     @Path("/subscrive")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response subscrive(User user){
-        System.out.println("Subscrive request of user "+user.getPhoneNumber());
-        users_rest.addUser(user);
-        return Response.status(200).build();//TODO hacer control de errores ??
+        if(user.getPhoneNumber() == "" || user.getTelegramToken() == ""){
+            throw new WebApplicationException(
+            Response.status(Response.Status.CONFLICT)
+                .entity("The phone number and telegram token should be specified")
+                .type(MediaType.TEXT_PLAIN)
+                .build()
+            );
+        }else{
+            //TODO si los id no perteneces a ninguna station error
+            System.out.println("Subscrive request of user "+user.getPhoneNumber());
+            users_rest.addUser(user);
+            return Response.status(200).build();
+        }
+        
     }
     
     @GET

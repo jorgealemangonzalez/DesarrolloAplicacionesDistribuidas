@@ -14,7 +14,8 @@ public class User {
     
     public User(){};
     
-    public User(String phoneNumber, List<String> stationIds, String telegramToken) {
+    public User(String phoneNumber, List<String> stationIds,
+                String telegramToken) {
         this.phoneNumber = phoneNumber;
         this.stationIds = stationIds;
         this.telegramToken = telegramToken;
@@ -54,6 +55,9 @@ public class User {
                 SstationIds += " , ";
         }
         SstationIds += " ]";
-        return "Subscription{" + "phoneNumber=" + phoneNumber + ", stationIds=" + SstationIds + ", telegramToken=" + telegramToken + '}';
+        return "Subscription{" + 
+                "phoneNumber=" + phoneNumber + 
+                ", stationIds=" + SstationIds + 
+                ", telegramToken=" + telegramToken + '}';
     }
 }

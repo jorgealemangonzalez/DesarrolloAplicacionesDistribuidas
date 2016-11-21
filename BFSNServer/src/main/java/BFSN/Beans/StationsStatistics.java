@@ -1,23 +1,25 @@
 package BFSN.Beans;
 
 
-
-
 /**
  *
  * @author jorgeAleman
  */
 public class StationsStatistics {
-    //Objeto con la informacion de las estadisticas que hagamos
+    
     private String totalFreeSlots ;
     private String totalOcupiedSlots;
     private String totalNumberStations;
     private String averageAltitude;
-    private String emptySlots ="";
-    //TODO poner stations llenas y vacias
+    private String stationsWithoutSlots ="";
     
     public StationsStatistics(){}
     
+    /**
+     * Obtains the different statics from an stations object.
+     * This statics will be saved on the different atributes.
+     * @param stations 
+     */
     public StationsStatistics(Stations stations) {
         System.out.println("Creating StationsStatistics object");
         Integer totalFreeSlotsLocal = 0;
@@ -28,7 +30,7 @@ public class StationsStatistics {
         for(Station station : stations.getStations()){
             //System.out.println("Extracting station: "+station.toString());
             if(station.getSlots().equals("0")){
-                emptySlots += station.getId() + " ";
+                stationsWithoutSlots += station.getId() + " ";
             }
             totalFreeSlotsLocal += Integer.parseInt(station.getSlots());
             //System.out.println(totalFreeSlotsLocal);
@@ -38,7 +40,8 @@ public class StationsStatistics {
             //System.out.println(cumAltitude);
         }
         //System.out.println("Extraction successfull");
-        Double averageAltitudeLocal = (double)cumAltitude / (double)totalNumberStationsLocal ;
+        Double averageAltitudeLocal = 
+                (double)cumAltitude / (double)totalNumberStationsLocal ;
         this.averageAltitude = averageAltitudeLocal.toString();
         this.totalFreeSlots = totalFreeSlotsLocal.toString();
         this.totalOcupiedSlots = totalOcupiedSlotsLocal.toString();
@@ -47,13 +50,15 @@ public class StationsStatistics {
         //System.out.println(this.toString());
     }
 
-    public String getEmptySlots() {
-        return emptySlots;
-    }
-    public void setEmptySlots(String emptySlots){
-        this.emptySlots = emptySlots;
+    public String getStationsWithoutSlots() {
+        return stationsWithoutSlots;
     }
 
+    public void setStationsWithoutSlots(String stationsWithoutSlots) {
+        this.stationsWithoutSlots = stationsWithoutSlots;
+    }
+
+    
     public String getTotalFreeSlots() {
         return totalFreeSlots;
     }
@@ -88,7 +93,12 @@ public class StationsStatistics {
     
     @Override
     public String toString() {
-        return "StationsStatics{" + "totalFreeSlots=" + totalFreeSlots + ", totalOcupiedSlots=" + totalOcupiedSlots + ", totalNumberStations=" + totalNumberStations + ", averageAltitude=" + averageAltitude + ", emptySlots by id="+ emptySlots +'}';
+        return "StationsStatics{" + 
+                "totalFreeSlots=" + totalFreeSlots + 
+                ", totalOcupiedSlots=" + totalOcupiedSlots + 
+                ", totalNumberStations=" + totalNumberStations + 
+                ", averageAltitude=" + averageAltitude + 
+                ", emptySlots by id="+ stationsWithoutSlots +'}';
     }
     
      

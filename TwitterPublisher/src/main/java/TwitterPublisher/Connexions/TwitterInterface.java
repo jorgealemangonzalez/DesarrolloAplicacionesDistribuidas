@@ -11,10 +11,15 @@ import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
 /**
- *
+ * Middle object to connect to Twitter API by sending a message.
  * @author jorgeAleman
  */
 public class TwitterInterface {
+    /**
+     * Publish the given message on twitter.
+     * @param message
+     * @throws TwitterException 
+     */
     public static void publish(String message) throws TwitterException{
         
         TwitterFactory factory = new TwitterFactory();
