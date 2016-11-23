@@ -9,6 +9,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -27,7 +28,15 @@ public class RESTStationsService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getStations(){
         System.out.println("Get stations request...");
-        return Response.status(200).entity(RESTStationsService.getStaticStations()).build();
+        Stations station = RESTStationsService.getStaticStations();
+        if(station != null){
+            return Response.status(200).entity(station).build();
+        }else{
+            throw new WebApplicationException(
+                    Response.status(Response.Status.NOT_FOUND)
+                    .entity("There are no stations available")
+                    .type(MediaType.TEXT_HTML_TYPE).build());
+        }
     }
     
     //Para testear , no para la practica
