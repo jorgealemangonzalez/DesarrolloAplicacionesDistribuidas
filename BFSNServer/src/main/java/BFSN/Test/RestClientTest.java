@@ -44,7 +44,7 @@ public class RestClientTest {
         List<String> jorgeStationIds = new LinkedList<String>(Arrays.asList("1","2","18","9","20","11","100"));
         User jorge = new User("677166464",jorgeStationIds,"136502577");
         List<String> arnauStationIds = new LinkedList<String>(Arrays.asList("99","78","18","9","123","77","89"));
-        User arnau = new User("677166464",arnauStationIds,"239602143");
+        User arnau = new User("11",arnauStationIds,"239602143");
         User addjorge = target.path("client/subscrive").request(MediaType.APPLICATION_JSON_TYPE)
                 .post(Entity.entity(jorge, MediaType.APPLICATION_JSON), User.class);
         User addarnau = target.path("client/subscrive").request(MediaType.APPLICATION_JSON_TYPE)

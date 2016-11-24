@@ -4,7 +4,8 @@ package TwitterPublisher.Beans;
 
 
 /**
- *
+ *Object with all the information about the Statistics of the Stations
+ * stored in our system
  * @author jorgeAleman
  */
 public class StationsStatistics {

@@ -50,7 +50,7 @@ public class RESTClientService {
                 .type(MediaType.TEXT_PLAIN)
                 .build()
             );
-        }/*lse if(users_rest.findByPhone(user.getPhoneNumber()) == null){
+        }else if(RESTClientService.getStaticUsers().findByPhone(user.getPhoneNumber()) != null){
             System.out.println("movil existente");
             throw new WebApplicationException(
             Response.status(Response.Status.CONFLICT)
@@ -58,8 +58,7 @@ public class RESTClientService {
                 .type(MediaType.TEXT_PLAIN)
                 .build()
             );     
-        }*/else{
-            //TODO al añadir un telefono existente peta revisar!
+        }else{
             users_rest.addUser(user);
             return Response.status(200).build();
         }
@@ -120,7 +119,12 @@ public class RESTClientService {
         }
         
     }
-
+    
+     /**
+     * 
+     * private getter of the variable users_rest
+     * @return Users
+     */
     private static Users getStaticUsers(){
         return RESTClientService.users_rest;
     }

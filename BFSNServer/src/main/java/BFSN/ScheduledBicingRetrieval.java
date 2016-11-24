@@ -15,13 +15,14 @@ import org.quartz.JobExecutionException;
  */
 
 /**
- *
+ * Scheduled Job that update every 60 seconds
+ * the information about bicing status.
  * @author jorgeAleman
  */
 public class ScheduledBicingRetrieval implements Job{
     
     /**
-     * 
+     * Main function that execute the job
      * @param context 
      */
     public void execute(JobExecutionContext context) throws JobExecutionException {

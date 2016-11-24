@@ -22,7 +22,9 @@ import org.quartz.impl.StdSchedulerFactory;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 /**
- *
+ * BSFL RestServer
+ * initialize the server, and the scheduled jobs
+ * 
  * @author jorgeAleman
  */
 public class BFSLRestServer {
