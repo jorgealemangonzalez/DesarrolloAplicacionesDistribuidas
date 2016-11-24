@@ -4,7 +4,7 @@ package BFSN.Beans;
 import java.util.List;
 
 /**
- *
+ * User with specific atributes
  * @author jorgeAleman
  */
 public class User {
@@ -14,6 +14,12 @@ public class User {
     
     public User(){};
     
+     /**
+     * Public Constructor of the User object
+     * @param phoneNumber telefono usuario a notificar
+     * @param stationIds lista de strings con los ids a subscribirse
+     * @param telegramToken token identificador del usuario en Telegram
+     */
     public User(String phoneNumber, List<String> stationIds,
                 String telegramToken) {
         this.phoneNumber = phoneNumber;

@@ -6,7 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * 
+ * Object with a HashMap storing all the stations
+ * identified by an unique id
  * @author jorgeAleman
  */
 public class Stations {
@@ -33,7 +34,14 @@ public class Stations {
     }
     
     public Station getStationById(String id) {
-        return this.stations.get(id);
+        //System.out.println("encontrado id " + this.stations.get(id));
+        if(this.stations.get(id) != null){
+            return this.stations.get(id);
+        }
+        else{
+            Station stationblank = new Station(id);
+            return stationblank;
+        }
     }
 
     @Override

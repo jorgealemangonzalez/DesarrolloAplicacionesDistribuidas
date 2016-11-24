@@ -23,6 +23,12 @@ public class RESTStationsService {
     //Es una cache que se actualiza cada 60s
     private static Stations stations;
     
+     /**
+     * 
+     * Makes a request to get all the stations in our system
+     * @return <b>code succesfull: <code>200</code> </b> Return all stations
+     * @throws <b>ERROR: no stations were found</b> 
+     */
     @GET
     @Path("/getStations")
     @Produces(MediaType.APPLICATION_JSON)
@@ -60,7 +66,12 @@ public class RESTStationsService {
     }
     
     
-    
+     /**
+     * 
+     * Makes a request to get all the statistics about our stations
+     * @return <b>code succesfull: <code>200</code> </b> Return all statistics of Stations
+     * @throws <b>ERROR: no statistics were found</b> 
+     */
     @GET
     @Path("/getStationsStatistics")
     @Produces(MediaType.APPLICATION_JSON)

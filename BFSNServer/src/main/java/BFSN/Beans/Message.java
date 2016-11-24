@@ -1,7 +1,8 @@
 package BFSN.Beans;
 
 /**
- *
+ *Object that stores the necessary information
+ * about a message for Telegram
  * @author Jorge Aleman , Arnau Guinart
  */
 public class Message {
@@ -12,7 +13,11 @@ public class Message {
     public Message(){
         
     }
-    
+     /**
+     * Constructor of the Message
+     * @param chat_id telegram token
+     * @param text the message you want to send
+     */
     public Message(long chat_id, String text) {
         this.chat_id = chat_id;
         this.text = text;

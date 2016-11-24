@@ -5,7 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- *
+ * Lista de Usuarios guardados en un HashMap
+ * identificados por su único número de telefono
  * @author jorgeAleman
  */
 public class Users {

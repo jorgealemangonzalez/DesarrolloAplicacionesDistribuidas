@@ -9,15 +9,16 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 
 /**
- *
+ * Middleware para connectar con la API de Telegram
  * @author jorgeAleman
  */
 public class TelegramInterface {
     
     /**
-     *
-     * @param id
-     * @param text
+     * Enviar mensajes a un usuario especifico con
+     * la información deseada
+     * @param id Token del usuario
+     * @param text Mensaje a enviar
      * @return
      */
     public static boolean sendMesage(String id , String text){

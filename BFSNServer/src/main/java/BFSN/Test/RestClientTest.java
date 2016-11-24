@@ -4,6 +4,7 @@ import BFSN.Beans.Users;
 import BFSN.Beans.StationsStatistics;
 import BFSN.Beans.User;
 import BFSN.Beans.Stations;
+import BFSN.Connexions.TelegramInterface;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -25,7 +26,7 @@ public class RestClientTest {
               
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target("http://localhost:15000");
-        
+               
         System.out.println();
         System.out.println("Retrieving stations...");
         Stations stations = target.path("stations/getStations").request(MediaType.APPLICATION_JSON_TYPE).get(new GenericType< Stations >(){});
@@ -54,7 +55,7 @@ public class RestClientTest {
         Users listOfUsers = target.path("client/getClients").request(MediaType.APPLICATION_JSON_TYPE).get(new GenericType< Users >(){});
         System.out.println("Clients obtained: "+listOfUsers);
 
-        
-        
+        //Telegram
+        //TelegramInterface.sendMesage(arnau.getTelegramToken(), "AA");
     }
 }

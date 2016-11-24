@@ -1,6 +1,7 @@
 package BFSN.Beans;
 /**
- *
+ * Object with all the specific caracteristics
+ * that have a Station in Bicing System
  * @author jorgeAleman
  */
 public class Station {
@@ -20,6 +21,11 @@ public class Station {
     @Override
     public String toString() {
         return "Station{" + "id=" + id + ", type=" + type + ", latitude=" + latitude + ", longitude=" + longitude + ", streetName=" + streetName + ", streetNumber=" + streetNumber + ", altitude=" + altitude + ", slots=" + slots + ", bikes=" + bikes + ", nearbyStations=" + nearbyStations + ", status=" + status + '}';
+    }
+
+    public Station(String id) {
+        this.id = id;
+        this.latitude = "-1";
     }
     
     public String getId() {

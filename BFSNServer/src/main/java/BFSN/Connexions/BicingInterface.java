@@ -11,12 +11,19 @@ import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 
 /**
- *
+ * Middleware para conectar con Bicing y poder 
+ * descargar la información sobre sus "stations"
  * @author jorgeAleman
  */
 public class BicingInterface {
     private static Stations stations ;
     
+     /**
+     * Coger las características de todas las staciones
+     * a través de JSON.
+     * @return <b> Obtained station information</b>  
+     * @throws <b>ERROR: Can't connect to the Bicing API</b> 
+     */
     public static Stations getStations(){
         System.out.println("Downloading bicing stations...");
         Client client = ClientBuilder.newClient();
