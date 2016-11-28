@@ -26,7 +26,7 @@ public class TwitterInterface {
         Twitter twitter = factory.getInstance();
         twitter.setOAuthConsumer("vIZ097dCEeXqnYofk8N6qTw9E", "GdN2pVxNTHJNRBZltaeeCDSTRScQL1bjCzlIgDza2WVRGfZ5SC");
         twitter.setOAuthAccessToken(new AccessToken("795590633918464001-NpyvUY0OylVbLNznVvoG98M8pMIaajv", "z1xR0jyHBbUsDioW3T7LIAC9b3FgTyvaGxgMSiGGn9cjR"));
-        twitter4j.Status status = twitter.updateStatus(message);
+        twitter.updateStatus(message);
         System.out.println("Twitter message has been published");
         
     }

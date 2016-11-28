@@ -27,7 +27,7 @@ public class TelegramInterface {
         WebTarget targetSendMessage = client.target("https://api.telegram.org").path("/bot231813123:AAGgLXMBNeEIsNBFuQCrPNoL4hJ0pUZqhw0/sendMessage");
         Message mensaje = new Message(Long.parseLong(id),text);
         try{
-            String response = targetSendMessage.request()
+            targetSendMessage.request()
                 .post(Entity.entity(mensaje, MediaType.APPLICATION_JSON_TYPE), String.class);
         }catch(BadRequestException e){
             e.getMessage();

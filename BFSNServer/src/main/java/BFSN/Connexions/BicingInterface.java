@@ -2,7 +2,6 @@ package BFSN.Connexions;
 
 
 import BFSN.Beans.Stations;
-import java.io.PrintWriter;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;

@@ -6,7 +6,6 @@ import BFSN.Beans.Station;
 import BFSN.Beans.User;
 import BFSN.Beans.Stations;
 import BFSN.Connexions.TelegramInterface;
-import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -24,19 +23,17 @@ import javax.ws.rs.core.Response;
  */
 @Path("/client")
 public class RESTClientService {
-    private static Users users_rest;
+    private static Users users_rest = new Users();
     
     public RESTClientService(){
-        if(users_rest == null){
-            users_rest = new Users();
-        }
+    	
     };  
         
     /**
-     * Subscrive a user to our System
+     * Subscrive a user to the system
      * @param user usuario a subscrivir
      * @return <b>code: <code>200</code> </b> Successful
-     * @throws <b>ERROR: error in the input information</b>
+     * @throws <b>ERROR: error on input information</b>
      */
     @POST
     @Path("/subscrive")
@@ -59,7 +56,19 @@ public class RESTClientService {
                 .build()
             );     
         }else{
-            users_rest.addUser(user);
+        	
+        	for(String stationId : user.getStationIds()){
+        		if(RESTStationsService.getStaticStations().getStationById(stationId) == null){
+        			throw new WebApplicationException(
+        		            Response.status(Response.Status.CONFLICT)
+        		                .entity("The station id "+stationId+" does not exist. Please specify stations that exist.")
+        		                .type(MediaType.TEXT_PLAIN)
+        		                .build()
+		            );
+        		}
+        	}
+        	
+            RESTClientService.getStaticUsers().addUser(user);
             return Response.status(200).build();
         }
         
@@ -96,17 +105,16 @@ public class RESTClientService {
     @Path("/notifySlots/{phonenumber}")
     public Response notifySlots(@PathParam("phonenumber") String phone){
         System.out.println("Request to send slots by phone to "+phone);
-        User user = users_rest.findByPhone(phone);
+        User user = RESTClientService.getStaticUsers().findByPhone(phone);
         if(user != null){
             String mesage = "This are the free slots in your subscrived bicing stations:\n ";
             Stations stations = RESTStationsService.getStaticStations();
             for(String userStationId : user.getStationIds()){
                 Station station = stations.getStationById(userStationId);
-                //System.out.println("station value  "+station.getId()); //xapuza para id que no esten en bicing
-                if(station.getLatitude().compareTo("-1") != 0)mesage += "Station " + station.getId() + " has " + station.getSlots() + " free slots\n";
+                if(station != null)mesage += "Station " + station.getId() + " has " + station.getSlots() + " free slots\n";
             
             }       
-            TelegramInterface.sendMesage(user.getTelegramToken(), mesage);//TODO Maibe change to tokenId
+            TelegramInterface.sendMesage(user.getTelegramToken(), mesage);
             return Response.status(200).build();
             
         }else{

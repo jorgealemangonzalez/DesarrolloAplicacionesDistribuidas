@@ -33,15 +33,13 @@ public class Stations {
         }
     }
     
+    /**
+     * 
+     * @param id
+     * @return Station or null if didn't found
+     */
     public Station getStationById(String id) {
-        //System.out.println("encontrado id " + this.stations.get(id));
-        if(this.stations.get(id) != null){
-            return this.stations.get(id);
-        }
-        else{
-            Station stationblank = new Station(id);
-            return stationblank;
-        }
+        return this.stations.get(id);
     }
 
     @Override

@@ -15,7 +15,6 @@ public class StationsStatistics {
     private String totalNumberStations;
     private String averageAltitude;
     private String stationsWithoutSlots ="";
-    //TODO poner stations llenas y vacias
     
     public StationsStatistics(){}
     

@@ -30,10 +30,12 @@ public class TwitterPublisherBFSNClient implements Job{
         // get statistics
         StationsStatistics statistics =  BFSNpublicAPI.request(MediaType.APPLICATION_JSON_TYPE).get(new GenericType<StationsStatistics>(){});
         //Parse them to obtain a plain text message
-        String message = this.parseStatics(statistics);
+        String[] messages = this.parseStatics(statistics).split("mysplit");
         
         try {
-            TwitterInterface.publish(message);
+        	for(String message : messages)
+        		TwitterInterface.publish(message);
+        	System.out.println("The statistics has been published");
         } catch (TwitterException ex) {
             Logger.getLogger(TwitterPublisherBFSNClient.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -49,8 +51,8 @@ public class TwitterPublisherBFSNClient implements Job{
         parsed+= "Average altitude: "+stationsStatistics.getAverageAltitude()+"\n";
         parsed+= "Total free slots: "+stationsStatistics.getTotalFreeSlots()+"\n";
         parsed+= "Total number of stations: "+stationsStatistics.getTotalNumberStations()+"\n";
-        parsed+= "Total ocupied slots: "+stationsStatistics.getTotalOcupiedSlots()+"\n";
-        parsed+= "Total stations without bikes: "+stationsStatistics.getStationsWithoutSlots()+"\n";
+        parsed+= "Total ocupied slots: "+stationsStatistics.getTotalOcupiedSlots()+"\nmysplit";
+        parsed+= "Stations without bikes: "+stationsStatistics.getStationsWithoutSlots()+"\n";
         
         return parsed;
     }

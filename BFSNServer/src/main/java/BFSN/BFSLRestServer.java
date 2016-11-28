@@ -2,7 +2,6 @@ package BFSN;
 
 import BFSN.PublicAPI.RESTStationsService;
 import BFSN.PublicAPI.RESTClientService;
-import com.sun.net.httpserver.HttpServer;
 import java.io.IOException;
 import java.net.URI;
 import java.util.HashSet;
@@ -33,8 +32,8 @@ public class BFSLRestServer {
         Set< Class<?> > services = new HashSet< Class<?> > ();
         services.add(RESTClientService.class);
         services.add(RESTStationsService.class);
-        ResourceConfig config = new ResourceConfig(services);//TODO see if that works
-        HttpServer server = JdkHttpServerFactory.createHttpServer(baseUri, config);
+        ResourceConfig config = new ResourceConfig(services);
+        JdkHttpServerFactory.createHttpServer(baseUri, config);
         System.out.println("Server started...");
         
         System.out.println("Now creating scheduled bicing information retrieval...");
