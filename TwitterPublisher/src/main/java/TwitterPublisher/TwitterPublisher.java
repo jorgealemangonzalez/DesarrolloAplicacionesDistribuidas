@@ -13,6 +13,8 @@ import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
 
+import TwitterPublisher.Jobs.TwitterPublisherBFSNClient;
+
 /**
  * Publisher in tiwtter.
  * It creates a client who obtain the stations
