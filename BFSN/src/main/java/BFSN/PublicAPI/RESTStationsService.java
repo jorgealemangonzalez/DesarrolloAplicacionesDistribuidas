@@ -30,9 +30,9 @@ public class RESTStationsService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getStations(){
         System.out.println("Get stations request...");
-        Stations station = RESTStationsService.getStaticStations();
-        if(station != null){
-            return Response.status(200).entity(station).build();
+        Stations stations = RESTStationsService.getStaticStations();
+        if(stations != null){
+            return Response.status(200).entity(stations).build();
         }else{
             throw new WebApplicationException(
                     Response.status(Response.Status.NOT_FOUND)

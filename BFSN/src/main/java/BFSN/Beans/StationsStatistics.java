@@ -20,6 +20,7 @@ public class StationsStatistics {
      * This statics will be saved on the different atributes.
      * @param stations 
      */
+   
     public StationsStatistics(Stations stations) {
         System.out.println("Creating StationsStatistics object");
         Integer totalFreeSlotsLocal = 0;
@@ -40,8 +41,13 @@ public class StationsStatistics {
             //System.out.println(cumAltitude);
         }
         //System.out.println("Extraction successfull");
-        Double averageAltitudeLocal = 
+        Double averageAltitudeLocal;
+        if(totalNumberStationsLocal == 0){
+        	 averageAltitudeLocal = (double)0;
+        }else{
+        	averageAltitudeLocal = 
                 (double)cumAltitude / (double)totalNumberStationsLocal ;
+        }
         this.averageAltitude = averageAltitudeLocal.toString();
         this.totalFreeSlots = totalFreeSlotsLocal.toString();
         this.totalOcupiedSlots = totalOcupiedSlotsLocal.toString();
