@@ -1,0 +1,163 @@
+# this is an example of the Uber API
+# as a demonstration of an API spec in YAML
+swagger: '2.0'
+info:
+  title: BFSN API
+  description: API of the BFSN services
+  version: "1.0.0"
+
+produces:
+  - application/json
+paths:
+
+  /client/subscrive:
+    post:
+      tags:
+        - Client
+      summary: It register a given client into the system.
+      operationId: clientSubscrive
+
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: user
+          description: User object to subscrive
+          required: true
+          schema: 
+            $ref: '#/definitions/User'
+      responses:
+        "200":
+          description: Successfully subscrived
+        "409":
+          description: Invalid data
+          
+  /client/getClients:
+    get:
+      tags:
+        - Client
+      summary: Get all subscrived clients
+      operationId: getAllClients
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            $ref: "#/definitions/Users"
+              
+        "404":
+          description: No clients found
+  /client/notifySlots/{phoneNumber}:
+    get:
+      tags:
+        - Client
+      summary: Send a message through telegram with the information about the subscrived stations
+      operationId: notifySlots
+      parameters:
+        - in: path
+          name: phoneNumber
+          description: Phone number of the client to send the message
+          required: true
+          type: string
+      responses:
+        "200":
+          description: successful operation
+        "404":
+          description: There is no user with the requested phonenumber
+  /stations/getStations:
+    get:
+      tags:
+        - Stations
+      summary: Makes a request to get all the stations in the system
+      operationId: getStations
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            $ref: "#/definitions/Stations"
+        "404":
+          description: There are no stations available
+  /stations/getStationsStatistics:
+    get:
+      tags:
+        - Stations
+      summary: Makes a request to get the statistics of the stations
+      operationId: getStationsStatistics
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            $ref: "#/definitions/StationsStatistics"
+      
+definitions:
+  User:
+    type: object
+    properties:
+      phoneNumber:
+        type: string
+      stationIds:
+        type: array
+        items: 
+          type: string
+      telegramToken:
+        type: string
+  Users:
+    type: object
+    properties:
+      users: 
+        type: array
+        items:
+          $ref: '#/definitions/User'
+  Station:
+    type: object
+    properties:
+      id:
+        type: string
+      type:
+        type: string
+      latitude:
+        type: string
+      longitude:
+        type: string
+      streetName:
+        type: string
+      streetNumber:
+        type: string
+      altitude:
+        type: string
+      slots:
+        type: string
+      bikes:
+        type: string
+      nearbyStations:
+        type: string
+      status:
+        type: string
+        
+  Stations:
+    type: object
+    properties:
+      stations: 
+        type: array
+        items:
+          $ref: '#/definitions/Station'
+  StationsStatistics:
+    type: object
+    properties:
+      totalFreeSlots:
+        type: string
+      totalOcupiedSlots:
+        type: string
+      totalNumberStations:
+        type: string
+      averageAltitude:
+        type: string
+      stationsWithoutSlots:
+        type: string
+  
+        
